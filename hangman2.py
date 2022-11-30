@@ -10,16 +10,22 @@ masked_letters = []
 
 def show_masked_letters(word):
     display = []
-    letters = []
+    masked_letters = []
     for l in word:
-        letters.append('#')
-    print("Test letters left", letters)
+        masked_letters.append('#')
     return masked_letters
     
 
-def show_letters_found(masked_letters, guessed_letters):
-    pass
-    # take word at it to a dictinary, if the letter is in the word replace that letter in masked_letter in the same location
+def show_letters_found(word, masked_letters, guessed_letters):
+    letters = []
+    for l in word:
+        letters.append(l)
+    for i in guessed_letters: 
+        if i in letters:
+            location = letters.index(i)
+    masked_letters[location] = i
+    print("Missing letters left in the word ", masked_letters)
+
 
 letters = []
 for letter in word:
@@ -42,9 +48,8 @@ while True:
             print("Yes that letter is in the word")
             guessed_letters.append(guess)
             letters.remove(guess)
-            show_letters_found(masked_letters, guessed_letters)
+            show_letters_found(word, masked_letters, guessed_letters)
             print("Current correct letters are: ", guessed_letters)
-            print("Letters left in the word ", (show_masked_letters(word)))
         else:
             print("Sorry that letter is not in the word")
             guesses_count = guesses_count - 1
