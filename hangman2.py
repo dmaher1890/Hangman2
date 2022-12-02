@@ -13,7 +13,7 @@ def show_masked_letters(word):
 
 #Function to unmask only the foun letters
 def show_letters_found(word, masked_letters, guessed_letters):
-    letters = []
+    letters = word_to_letters(word)
     for l in word:
         letters.append(l)
     for i in guessed_letters: 
@@ -21,6 +21,13 @@ def show_letters_found(word, masked_letters, guessed_letters):
             location = letters.index(i)
             masked_letters[location] = i
     print("Missing letters left in the word ", masked_letters)
+
+#Function to split a word into its composite letters putting them in a list
+def word_to_letters(word):
+    letters = []
+    for l in word:
+        letters.append(l)
+    return(letters)
 
 #words to choose from
 words = ['word', 'guess', 'another', 'boiler']
@@ -38,9 +45,7 @@ masked_letters = show_masked_letters(word)
 guesses_count = 6
 
 #split the word into its letters and put them in a list
-letters = []
-for letter in word:
-    letters.append(letter)
+letters = word_to_letters(word)
 
 #flow of the application
 while True:
@@ -59,7 +64,7 @@ while True:
             guessed_letters.append(guess)
             letters.remove(guess)
             show_letters_found(word, masked_letters, guessed_letters)
-            print("Current correct letters are: ", guessed_letters)
+            print("Current guessed letters are: ", guessed_letters)
         else:
             print("Sorry that letter is not in the word")
             guesses_count = guesses_count - 1
