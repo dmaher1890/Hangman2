@@ -1,21 +1,17 @@
-
 #need to test for a valid entry
+#skill levels
 
-import random 
+import random #To randomly choose a word
 
-words = ['word', 'guess', 'another', 'boiler']
-word = random.choice(words)
-guessed_letters = []
-masked_letters = []
-
+#Function to mask the letters on the word
 def show_masked_letters(word):
     display = []
     masked_letters = []
     for l in word:
         masked_letters.append('#')
-    return masked_letters
-    
+    return masked_letters 
 
+#Function to unmask only the foun letters
 def show_letters_found(word, masked_letters, guessed_letters):
     letters = []
     for l in word:
@@ -23,16 +19,30 @@ def show_letters_found(word, masked_letters, guessed_letters):
     for i in guessed_letters: 
         if i in letters:
             location = letters.index(i)
-    masked_letters[location] = i
+            masked_letters[location] = i
     print("Missing letters left in the word ", masked_letters)
 
+#words to choose from
+words = ['word', 'guess', 'another', 'boiler']
 
+#randomly choose word
+word = random.choice(words)
+
+#list to store the guessed letters right or wrong
+guessed_letters = []
+
+#calling to mask the letters in the found word
+masked_letters = show_masked_letters(word) 
+
+#number of guesses the user gets
+guesses_count = 6
+
+#split the word into its letters and put them in a list
 letters = []
 for letter in word:
     letters.append(letter)
 
-guesses_count = 10
-
+#flow of the application
 while True:
     if len(letters) == 0: 
         print("You won the word was", word)
@@ -54,9 +64,7 @@ while True:
             print("Sorry that letter is not in the word")
             guesses_count = guesses_count - 1
             guessed_letters.append(guess)
-            masked_letters = show_masked_letters(word) 
+            show_letters_found(word, masked_letters, guessed_letters)
             print("You have", guesses_count, "incorrect guesses left")
-            print("Letters left in the word ", masked_letters)
-        #print("test letters",  letters)
-        #print("guessed letters", guessed_letters)
+
         continue
