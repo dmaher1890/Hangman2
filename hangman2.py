@@ -1,4 +1,3 @@
-#need to test for a valid entry
 #skill levels
 
 import random #To randomly choose a word
@@ -56,7 +55,9 @@ while True:
         print("Sorry you ran out of guesses, the word was", word)
         break
     else: guess = input("What letter do you want to guess? ")
-    if guess in guessed_letters:
+    if guess.isalpha() == False:
+        print("Sorry that is not a valid letter")
+    elif guess in guessed_letters:
         print("Sorry you guessed that letter already")
     else:
         if guess in letters:
