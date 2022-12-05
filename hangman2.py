@@ -28,49 +28,52 @@ def word_to_letters(word):
         letters.append(l)
     return(letters)
 
-#words to choose from
-words = ['word', 'guess', 'another', 'boiler']
+def main():
+    #words to choose from
+    words = ['word', 'guess', 'another', 'boiler']
 
-#randomly choose word
-word = random.choice(words)
+    #randomly choose word
+    word = random.choice(words)
 
-#list to store the guessed letters right or wrong
-guessed_letters = []
+    #list to store the guessed letters right or wrong
+    guessed_letters = []
 
-#calling to mask the letters in the found word
-masked_letters = show_masked_letters(word) 
+    #calling to mask the letters in the found word
+    masked_letters = show_masked_letters(word) 
 
-#number of guesses the user gets
-guesses_count = 6
+    #number of guesses the user gets
+    guesses_count = 6
 
-#split the word into its letters and put them in a list
-letters = word_to_letters(word)
-
-#flow of the application
-while True:
-    if len(letters) == 0: 
-        print("You won the word was", word)
-        break
-    elif guesses_count == 0:
-        print("Sorry you ran out of guesses, the word was", word)
-        break
-    else: guess = input("What letter do you want to guess? ")
-    if guess.isalpha() == False:
-        print("Sorry that is not a valid letter")
-    elif guess in guessed_letters:
-        print("Sorry you guessed that letter already")
-    else:
-        if guess in letters:
-            print("Yes that letter is in the word")
-            guessed_letters.append(guess)
-            letters.remove(guess)
-            show_letters_found(word, masked_letters, guessed_letters)
-            print("Current guessed letters are: ", guessed_letters)
+    #split the word into its letters and put them in a list
+    letters = word_to_letters(word)
+    
+    #flow of the application
+    while True:
+        if len(letters) == 0: 
+            print("You won the word was:", word)
+            break
+        elif guesses_count == 0:
+            print("Sorry you ran out of guesses, the word was", word)
+            break
+        else: guess = input("What letter do you want to guess? ")
+        if guess.isalpha() == False:
+            print("Sorry that is not a valid letter")
+        elif guess in guessed_letters:
+            print("Sorry you guessed that letter already")
         else:
-            print("Sorry that letter is not in the word")
-            guesses_count = guesses_count - 1
-            guessed_letters.append(guess)
-            show_letters_found(word, masked_letters, guessed_letters)
-            print("You have", guesses_count, "incorrect guesses left")
+            if guess in letters:
+                print("Yes that letter is in the word")
+                guessed_letters.append(guess)
+                letters.remove(guess)
+                show_letters_found(word, masked_letters, guessed_letters)
+                print("Current guessed letters are: ", guessed_letters)
+            else:
+                print("Sorry that letter is not in the word")
+                guesses_count = guesses_count - 1
+                guessed_letters.append(guess)
+                show_letters_found(word, masked_letters, guessed_letters)
+                print("You have", guesses_count, "incorrect guesses left")
 
-        continue
+            continue
+
+main()
